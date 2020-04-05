@@ -43,8 +43,29 @@ module Enumerable
     true
   end
 
+  def my_count
+    i = 0
+    self.my_each do |x|
+      if yield (x) == true
+        i += 1
+      end
+    end
+    i
+  end
+
+  def my_map 
+    mapped_arr = []
+    self.my_each do |x|
+      mapped_arr << yield(x)
+    end
+    mapped_arr
+  end
+
+  def my_inject 
+    self.my_each do |x|
+ 
 end
 
 
 
-puts ["lovess","hatess","yearss"].my_all? { |y| y.length == 6 }
+ puts [4,4,4,4,4].my_map { |y| y *2}
