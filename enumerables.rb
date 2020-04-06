@@ -61,11 +61,27 @@ module Enumerable
     mapped_arr
   end
 
-  def my_inject 
+  def my_inject(accumulator=nil)
+    case accumulator
+    when nil
+      acc = nil
+    else 
+      acc = accumulator
+    end
     self.my_each do |x|
+      if acc.nil?
+        acc = x
+      else 
+      acc = yield(acc, x)
+    end
+    end
+    acc
+  end
  
 end
 
 
-
- puts [4,4,4,4,4].my_map { |y| y *2}
+def multiply_els(array)
+  array.my_inject(0){|total, i| total*i}
+end
+puts multiply_els([2,4,5])
