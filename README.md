@@ -8,9 +8,7 @@ This project recreated the each method and then used it to recreate the followin
 
 - Ruby
 
-## Getting Started
-
-### Setup
+## Setup
 
 To run this project use the terminal and the command $rb #{file_name.rb}
 
