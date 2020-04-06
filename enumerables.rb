@@ -56,6 +56,9 @@ module Enumerable
   def my_map 
     mapped_arr = []
     self.my_each do |x|
+      unless block_given?
+        mapped_arr << proc.call(x)
+      else
       mapped_arr << yield(x)
     end
     mapped_arr
