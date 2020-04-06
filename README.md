@@ -1,50 +1,26 @@
 # ruby-enumerables
 
-> One paragraph statement about the project.
+> This project is about recreating Ruby's Enumerable Module.
 
-Additional description about the project and its features.
+This project recreated the each method and then used it to recreate the following methods: *select, *all, *any, *none, *count, *map and *inject.
 
 ## Built With
 
-- Major languages,
-- frameworks,
-- technologies used
+- Ruby
 
 ## Getting Started
 
-**This is an example of how you may give instructions on setting up your project locally.**
-**Modify this file to match your project, remove sections that don't apply. For example: delete the testing section if the currect project doesn't require testing.**
-
-
-To get a local copy up and running follow these simple example steps.
-
-### Prerequisites
-
 ### Setup
 
-### Install
-
-### Usage
-
-### Run tests
-
-### Deployment
-
-
+To run this project use the terminal and the command $rb #{file_name.rb}
 
 ## Authors
 
-👤 **Author1**
+👤 **Alvaro Paz**
 
-- Github: [@githubhandle](https://github.com/githubhandle)
-- Twitter: [@twitterhandle](https://twitter.com/twitterhandle)
-- Linkedin: [linkedin](https://linkedin.com/linkedinhandle)
-
-👤 **Author2**
-
-- Github: [@githubhandle](https://github.com/githubhandle)
-- Twitter: [@twitterhandle](https://twitter.com/twitterhandle)
-- Linkedin: [linkedin](https://linkedin.com/linkedinhandle)
+- Github: [@alvaropazz](https://github.com/alvaropazz)
+- Twitter: [@alvaropazz](https://twitter.com/alvaropazz)
+- Linkedin: [linkedin](https://linkedin.com/in/alvaropaz/)
 
 ## 🤝 Contributing
 
@@ -58,9 +34,11 @@ Give a ⭐️ if you like this project!
 
 ## Acknowledgments
 
-- Hat tip to anyone whose code was used
-- Inspiration
-- etc
+- These are the resources I used to fully understand the *inject* method:
+- [T-Shaped's Blog](http://kylefdoherty.github.io/blog/2014/06/13/ruby-inject-basics/)
+- [Mauricio Linares' Blog](https://mauricio.github.io/2015/01/12/implementing-enumerable-in-ruby.html)
+- To understand the "nil" value I used this resource:
+- [Mehdi Farsi's Medium Post](https://medium.com/rubycademy/the-nil-value-in-ruby-d60e6a3642b9)
 
 ## 📝 License
 
