@@ -32,11 +32,15 @@ module Enumerable
   end
 
   def my_select
-    selection = []
-    my_each do |x|
-      selection << x if (yield x) == true
+    if block_given?
+      selection = []
+      my_each do |x|
+        selection << x if (yield x) == true
+      end
+      selection
+    else
+      to_enum
     end
-    selection
   end
 
   def my_all?
@@ -69,14 +73,18 @@ module Enumerable
   end
 
   def my_map
-    mapped_arr = []
-    my_each do |x|
-      mapped_arr << if block_given?
-                      yield(x)
-                    else
-                      proc.call(x)
-                    end
-      mapped_arr
+    if block_given?
+      mapped_arr = []
+      my_each do |x|
+        mapped_arr << if block_given?
+                        yield(x)
+                      else
+                        proc.call(x)
+                      end
+        mapped_arr
+      end
+    else
+      to_enum
     end
   end
 
