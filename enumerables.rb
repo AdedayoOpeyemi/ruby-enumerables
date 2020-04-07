@@ -43,31 +43,58 @@ module Enumerable
     end
   end
 
-  def my_all?
-    my_each do |x|
-      return false unless yield x
+  def my_all?(_args = nil)
+    if block_given?
+      my_each do |x|
+        return false unless yield x
+      end
+    elsif !block_given?
+      my_each do |x|
+        return false if x.nil?
+      end
     end
     true
   end
 
   def my_any?
-    my_each do |x|
-      return true if yield x
+    if block_given?
+      my_each do |x|
+        return true if yield x
+      end
+    elsif !block_given?
+      my_each do |x|
+        return false if x.nil?
+      end
     end
     false
   end
 
   def my_none?
-    my_each do |x|
-      return false if yield x
+    if block_given?
+      my_each do |x|
+        return false if yield x
+      end
+    elsif !block_given?
+      my_each do |x|
+        return false if x.nil?
+      end
     end
     true
   end
 
-  def my_count
+  def my_count(args = nil)
     i = 0
-    my_each do |x|
-      i += 1 if yield x
+    if block_given?
+      my_each do |x|
+        i += 1 if yield x
+      end
+    elsif !args.nil?
+      my_each do |x|
+        i += 1 if args == x
+      end
+
+    else
+      i = size
     end
     i
   end
@@ -108,12 +135,3 @@ module Enumerable
   end
 end
 
-# puts [1,2,3,4,5].my_inject(:*)
-
-puts [1, 2, 3].my_each
-
-# def multiply_els(array)
-#   array.my_inject(:+)
-# end
-# puts multiply_els([2,4,5])
-# [5, 2, 3].my_all?
