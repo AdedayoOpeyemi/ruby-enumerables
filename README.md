@@ -33,10 +33,12 @@ Give a ⭐️ if you like this project!
 ## Acknowledgments
 
 - These are the resources I used to fully understand the *inject* method:
-- [T-Shaped's Blog](http://kylefdoherty.github.io/blog/2014/06/13/ruby-inject-basics/)
-- [Mauricio Linares' Blog](https://mauricio.github.io/2015/01/12/implementing-enumerable-in-ruby.html)
-- To understand the "nil" value I used this resource:
-- [Mehdi Farsi's Medium Post](https://medium.com/rubycademy/the-nil-value-in-ruby-d60e6a3642b9)
+- - [T-Shaped's Blog](http://kylefdoherty.github.io/blog/2014/06/13/ruby-inject-basics/)
+- - [Mauricio Linares' Blog](https://mauricio.github.io/2015/01/12/implementing-enumerable-in-ruby.html)
+- The following resources were also used:
+- - [About the *nil* object](https://medium.com/rubycademy/the-nil-value-in-ruby-d60e6a3642b9)
+- - [About the *send* method](https://medium.com/@pojotorshemi/send-me-a-river-ruby-send-method-3b295173e5c8)
+- - [More on the *send* method](https://iamchrissmith.io/ruby-send-method-exploration)
 
 ## 📝 License
 

@@ -1,25 +1,33 @@
 module Enumerable
   def my_each
-    i = 0
-    loop do
-      yield self[i]
-      i += 1
-      break if i == size
+    if block_given?
+      i = 0
+      loop do
+        yield self[i]
+        i += 1
+        break if i == size
 
-      self
+        self
+      end
+    else
+      to_enum
     end
   end
 
   def my_each_with_index
-    i = 0
-    index = 0
-    loop do
-      yield self[i], index
-      i += 1
-      index += 1
-      break if i == size
+    if block_given?
+      i = 0
+      index = 0
+      loop do
+        yield self[i], index
+        i += 1
+        index += 1
+        break if i == size
 
-      self
+        self
+      end
+    else
+      to_enum
     end
   end
 
@@ -75,7 +83,7 @@ module Enumerable
   def my_inject(accumulator = nil)
     acc = case accumulator
           when Symbol
-            return my_inject { |acc, x| acc.send(accumulator, x) }
+            return my_inject { |s, e| s.send(accumulator, e) }
           when nil
             nil
           else
@@ -92,8 +100,12 @@ module Enumerable
   end
 end
 
-def multiply_els(array)
-  array.my_inject(:+)
-end
-puts multiply_els([2,4,5])
+# puts [1,2,3,4,5].my_inject(:*)
+
+puts [1, 2, 3].my_each
+
+# def multiply_els(array)
+#   array.my_inject(:+)
+# end
+# puts multiply_els([2,4,5])
 # [5, 2, 3].my_all?
