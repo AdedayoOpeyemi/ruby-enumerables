@@ -35,7 +35,7 @@ module Enumerable
     if block_given?
       selection = []
       my_each do |x|
-        selection << x if (yield x) == true
+        selection << x if yield(x) == true
       end
       selection
     else
@@ -43,43 +43,58 @@ module Enumerable
     end
   end
 
-  def my_all?(_args = nil)
-    if block_given?
+  def my_all?(args = nil)
+    result = true
+    if block_given? && args.nil?
       my_each do |x|
-        return false unless yield x
+        result = false unless yield x
       end
-    elsif !block_given?
+    elsif !block_given? && args.nil?
       my_each do |x|
         return false if x.nil?
       end
+    elsif !args.nil?
+      my_each do |x|
+        result = false unless args == x
+      end
     end
-    true
+    result
   end
 
-  def my_any?
-    if block_given?
+  def my_any?(args = nil)
+    result = true
+    if block_given? && args.nil?
       my_each do |x|
-        return true if yield x
+        result = false unless yield x
       end
-    elsif !block_given?
+    elsif !block_given? && args.nil?
       my_each do |x|
-        return false if x.nil?
+        result = false if x.nil?
+      end
+    elsif !args.nil?
+      my_each do |x|
+        result = false if args != x
       end
     end
-    false
+    result
   end
 
-  def my_none?
-    if block_given?
+  def my_none?(args = nil)
+    result = true
+    if block_given? && args.nil?
       my_each do |x|
-        return false if yield x
+        result = false if yield x
       end
-    elsif !block_given?
+    elsif !block_given? && args.nil?
       my_each do |x|
-        return false if x.nil?
+        result = false if x == true
+      end
+    elsif !args.nil?
+      my_each do |x|
+        result = false if args == x
       end
     end
-    true
+    result
   end
 
   def my_count(args = nil)
@@ -116,22 +131,23 @@ module Enumerable
   end
 
   def my_inject(accumulator = nil)
-    acc = case accumulator
-          when Symbol
-            return my_inject { |s, e| s.send(accumulator, e) }
-          when nil
-            nil
-          else
-            accumulator
-          end
+    acc =
+      case accumulator
+      when Symbol
+        return my_inject { |s, e| s._send_(accumulator, e) }
+      when nil
+        nil
+      else
+        accumulator
+      end
     my_each do |x|
-      acc = if acc.nil?
-              x
-            else
-              yield(acc, x)
-            end
+      acc =
+        if acc.nil?
+          x
+        else
+          yield(acc, x)
+        end
     end
     acc
   end
 end
-
