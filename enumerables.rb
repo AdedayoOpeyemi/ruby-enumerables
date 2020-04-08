@@ -131,15 +131,14 @@ module Enumerable
   end
 
   def my_inject(accumulator = nil)
-    acc =
-      case accumulator
-      when Symbol
-        return my_inject { |s, e| s._send_(accumulator, e) }
-      when nil
-        nil
-      else
-        accumulator
-      end
+    acc = case accumulator
+          when Symbol
+            return my_inject { |s, e| s.send(accumulator, e) }
+          when nil
+            nil
+          else
+            accumulator
+          end
     my_each do |x|
       acc =
         if acc.nil?
@@ -151,3 +150,5 @@ module Enumerable
     acc
   end
 end
+
+puts [1, 2, 3].my_inject(:+)
