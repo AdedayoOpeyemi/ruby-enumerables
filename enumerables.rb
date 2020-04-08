@@ -150,5 +150,3 @@ module Enumerable
     acc
   end
 end
-
-puts [1, 2, 3].my_inject(:+)
