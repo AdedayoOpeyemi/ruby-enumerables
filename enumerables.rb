@@ -51,9 +51,17 @@ module Enumerable
       end
     elsif !block_given? && args.nil?
       my_each do |x|
-        return false if x.nil?
+        result = false if x == x.nil? || false
       end
-    elsif !args.nil?
+    elsif args.is_a? Class
+      my_each do |x|
+        result = false unless x.is_a? args
+      end
+    elsif args.is_a? Regexp
+      my_each do |x|
+        result = false unless x.match? args
+      end
+    else
       my_each do |x|
         result = false unless args == x
       end
@@ -71,7 +79,15 @@ module Enumerable
       my_each do |x|
         result = false if x.nil?
       end
-    elsif !args.nil?
+    elsif args.is_a? Class
+      my_each do |x|
+        result = false unless x.is_a? args
+      end
+    elsif args.is_a? Regexp
+      my_each do |x|
+        result = false unless x.match? args
+      end
+    else
       my_each do |x|
         result = false if args != x
       end
@@ -85,11 +101,19 @@ module Enumerable
       my_each do |x|
         result = false if yield x
       end
-    elsif !block_given? && args.nil?
+    elsif !block_given? && args.nil? || false
       my_each do |x|
         result = false if x == true
       end
-    elsif !args.nil?
+    elsif args.is_a? Class
+      my_each do |x|
+        result = false if x.is_a? args
+      end
+    elsif args.is_a? Regexp
+      my_each do |x|
+        result = false if x.match? args
+      end
+    else
       my_each do |x|
         result = false if args == x
       end
@@ -114,20 +138,18 @@ module Enumerable
     i
   end
 
-  def my_map
-    if block_given?
-      mapped_arr = []
-      my_each do |x|
-        mapped_arr << if block_given?
-                        yield(x)
-                      else
-                        proc.call(x)
-                      end
-        mapped_arr
-      end
-    else
-      to_enum
+  def my_map(proc = nil)
+    return to_enum unless block_given? || !proc.nil?
+
+    result = []
+    proc ?
+    my_each do
+    |x| result << proc.call(x)
+    end :
+    my_each do
+    |x| result << yield(x)
     end
+    result
   end
 
   def my_inject(accumulator = nil)
@@ -150,3 +172,9 @@ module Enumerable
     acc
   end
 end
+
+# puts [1, true, 'hi', []].my_all?
+
+# puts [1,2,3,4,5].my_map
+my_proc = proc { |num| num * 3 }
+puts [1, 2, 3, 4, 5].my_map my_proc

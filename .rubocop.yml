@@ -57,3 +57,9 @@ Metrics/CyclomaticComplexity:
   Enabled: false
 Metrics/ModuleLength:
   Enabled: false
+Metrics/MethodLength:
+  Enabled: false
+Lint/LiteralAsCondition:
+  Enabled: false
+Style/MultilineTernaryOperator:
+  Enabled: false
