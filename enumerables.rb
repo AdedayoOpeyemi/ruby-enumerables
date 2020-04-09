@@ -155,7 +155,7 @@ module Enumerable
   def my_inject(accumulator = nil)
     acc = case accumulator
           when Symbol
-            return my_inject { |s, e| s.send(accumulator, e) }
+            return my_inject { |a, b| a.send(accumulator, b) }
           when nil
             nil
           else
