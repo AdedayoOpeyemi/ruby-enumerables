@@ -51,7 +51,7 @@ module Enumerable
       end
     elsif !block_given? && args.nil?
       my_each do |x|
-        result = false if x == x.nil? || false
+        result = false if x.nil? || false
       end
     elsif args.is_a? Class
       my_each do |x|
@@ -63,33 +63,33 @@ module Enumerable
       end
     else
       my_each do |x|
-        result = false unless args == x
+        result = false unless x == args
       end
     end
     result
   end
 
   def my_any?(args = nil)
-    result = true
+    result = false
     if block_given? && args.nil?
       my_each do |x|
-        result = false unless yield x
+        result = true if yield x
       end
     elsif !block_given? && args.nil?
       my_each do |x|
-        result = false if x.nil?
+        result = true unless x.nil? || false
       end
     elsif args.is_a? Class
       my_each do |x|
-        result = false unless x.is_a? args
+        result = true if x.is_a? args
       end
     elsif args.is_a? Regexp
       my_each do |x|
-        result = false unless x.match? args
+        result = true if x.match? args
       end
     else
       my_each do |x|
-        result = false if args != x
+        result = true if x == args
       end
     end
     result
@@ -115,7 +115,7 @@ module Enumerable
       end
     else
       my_each do |x|
-        result = false if args == x
+        result = false if x == args
       end
     end
     result
@@ -143,11 +143,11 @@ module Enumerable
 
     result = []
     proc ?
-    my_each do
-    |x| result << proc.call(x)
+    my_each do |x|
+      result << proc.call(x)
     end :
-    my_each do
-    |x| result << yield(x)
+    my_each do |x|
+      result << yield(x)
     end
     result
   end
@@ -172,9 +172,3 @@ module Enumerable
     acc
   end
 end
-
-# puts [1, true, 'hi', []].my_all?
-
-# puts [1,2,3,4,5].my_map
-my_proc = proc { |num| num * 3 }
-puts [1, 2, 3, 4, 5].my_map my_proc
