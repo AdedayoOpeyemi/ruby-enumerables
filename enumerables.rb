@@ -51,7 +51,7 @@ module Enumerable
       end
     elsif !block_given? && args.nil?
       my_each do |x|
-        result = false if x.nil? || false
+        result = false if x.nil? || x == false
       end
     elsif args.is_a? Class
       my_each do |x|
@@ -77,7 +77,7 @@ module Enumerable
       end
     elsif !block_given? && args.nil?
       my_each do |x|
-        result = true unless x.nil? || false
+        result = true unless x.nil? || x == false
       end
     elsif args.is_a? Class
       my_each do |x|
@@ -101,7 +101,7 @@ module Enumerable
       my_each do |x|
         result = false if yield x
       end
-    elsif !block_given? && args.nil? || false
+    elsif !block_given? && args.nil? || x == false
       my_each do |x|
         result = false if x == true
       end
@@ -172,3 +172,7 @@ module Enumerable
     acc
   end
 end
+
+false_array = [1, false, 'hi', []]
+puts false_array.all?
+puts false_array.my_all?
