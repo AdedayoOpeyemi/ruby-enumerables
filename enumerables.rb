@@ -1,16 +1,20 @@
 module Enumerable
   def my_each
-    if block_given?
-      i = 0
-      loop do
+    return to_enum unless block_given?
+
+    i = 0
+    while i < size
+      if is_a? Array
         yield self[i]
         i += 1
-        break if i == size
-
         self
+      elsif is_a? Range
+        yield to_a[i]
+        i += 1
+        self
+      else
+        to_enum
       end
-    else
-      to_enum
     end
   end
 
@@ -18,11 +22,10 @@ module Enumerable
     if block_given?
       i = 0
       index = 0
-      loop do
+      while i < size
         yield self[i], index
         i += 1
         index += 1
-        break if i == size
 
         self
       end
@@ -152,27 +155,30 @@ module Enumerable
     result
   end
 
-  def my_inject(accumulator = nil)
-    acc = case accumulator
-          when Symbol
-            return my_inject { |a, b| a.send(accumulator, b) }
-          when nil
-            nil
-          else
-            accumulator
-          end
-    my_each do |x|
-      acc =
-        if acc.nil?
-          x
-        else
-          yield(acc, x)
-        end
+  def my_inject(accumulator = nil, operation = nil, &block)
+    if operation.nil? && block.nil?
+      operation = accumulator
+      accumulator = nil
     end
-    acc
+
+    block = case operation
+            when Symbol
+              ->(acc, value) { acc.send(operation, value) }
+            when nil
+              block
+            end
+
+    if accumulator.nil?
+      no_acc = true
+      accumulator = first
+    end
+
+    index = 0
+
+    my_each do |element|
+      accumulator = block.call(accumulator, element) unless no_acc && index.zero?
+      index += 1
+    end
+    accumulator
   end
 end
-
-false_array = [1, false, 'hi', []]
-puts false_array.all?
-puts false_array.my_all?

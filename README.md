@@ -32,8 +32,9 @@ Give a ⭐️ if you like this project!
 
 ## Acknowledgments
 
-- These are the resources I used to fully understand the *inject* method:
+- The following blog helped me to undertand the *inject* method:
 - - [T-Shaped's Blog](http://kylefdoherty.github.io/blog/2014/06/13/ruby-inject-basics/)
+- The following blog helped me to implement the *inject* method so that it passes all of the test required by Microverse's code reviewers
 - - [Mauricio Linares' Blog](https://mauricio.github.io/2015/01/12/implementing-enumerable-in-ruby.html)
 - The following resources were also used:
 - - [About the *nil* object](https://medium.com/rubycademy/the-nil-value-in-ruby-d60e6a3642b9)
