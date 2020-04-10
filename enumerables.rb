@@ -104,7 +104,7 @@ module Enumerable
       my_each do |x|
         result = false if yield x
       end
-    elsif !block_given? && args.nil? || x == false
+    elsif !block_given? && args.nil?
       my_each do |x|
         result = false if x == true
       end
