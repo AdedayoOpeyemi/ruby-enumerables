@@ -61,22 +61,54 @@ RSpec.describe Enumerable do
   end
 
   describe 'my_any?' do
-    it 'returns true if the block ever returns a value other than false or nil' do
-      expect(numbers_array.my_any? { |x| x == 5 }).to eql(true)
+    context 'A block is given' do
+      it 'returns true if the block ever returns a value other than false or nil' do
+        expect(numbers_array.my_any? { |x| x == 5 }).to eql(true)
+      end
     end
 
-    it 'returns true if it the block matches the regex at any point' do
-      expect(words_array.my_any? { |x| x.match(/h/) }).to eql(true)
+    context 'No block given' do
+      it 'returns true if any of the elements in the array belong to the class passed as argument' do
+        expect(nil_and_numbers_array.my_any?(Integer)).to eql(true)
+      end
+
+      it 'returns true if any of the elements in the array are not nil or false' do
+        expect(nil_and_numbers_array.my_any?).to eql(true)
+      end
+
+      it 'returns true if any of the elements in the array match the argument passed' do
+        expect(nil_and_numbers_array.my_any?(5)).to eql(true)
+      end
+
+      it 'returns true if it the block matches the regex at any point' do
+        expect(words_array.my_any? { |x| x.match(/h/) }).to eql(true)
+      end
     end
   end
 
   describe 'my_none?' do
-    it 'returns true if the block never returns true for all elements' do
-      expect(numbers_array.my_none? { |x| x == 5 }).to_not eql(true)
+    context 'A block is given' do
+      it 'returns true if the block never returns true for all elements' do
+        expect(numbers_array.my_none? { |x| x == 5 }).to_not eql(true)
+      end
     end
 
-    it 'returns true if the block never returns true for all elements' do
-      expect(numbers_array.my_none?(String)).to eql(true)
+    context 'No block given' do
+      it 'returns false if any of the elements in the array matches the argument passed' do
+        expect(numbers_array.my_none?(5)).to eql(false)
+      end
+
+      it 'returns true if none of the elements in the array is false' do
+        expect(numbers_array.my_none?(nil)).to eql(true)
+      end
+
+      it 'returns true if none of the elements in the array match the regular expresion' do
+        expect(words_array.my_none? { |x| x.match(/z/) }).to eql(true)
+      end
+
+      it 'returns true if the block never returns true for all elements' do
+        expect(numbers_array.my_none?(String)).to eql(true)
+      end
     end
   end
 
