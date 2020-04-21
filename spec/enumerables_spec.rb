@@ -3,6 +3,7 @@ require './lib/enumerables'
 
 RSpec.describe Enumerable do
   let(:numbers_array) { [1, 2, 3, 4, 5] }
+  let(:nil_and_numbers_array) { [nil, 2, nil, 4, 5] }
   let(:number_range) { (1..5) }
   let(:words_array) { %w[hola hello goodbye never always] }
 
@@ -34,12 +35,28 @@ RSpec.describe Enumerable do
   end
 
   describe 'my_all?' do
-    it 'returns true if the block never returns false or nil' do
-      expect(numbers_array.my_all? { |x| x == 5 }).to_not eql(true)
+    context 'A block is given' do
+      it 'returns true if the block never returns false or nil' do
+        expect(numbers_array.my_all? { |x| x == 5 }).to_not eql(true)
+      end
     end
 
-    it 'returns true if all of the elements inside an array correspond to the specified class' do
-      expect(numbers_array.my_all?(Integer)).to eql(true)
+    context 'No block given' do
+      it 'returns true if all of the elements inside an array correspond to the specified class' do
+        expect(numbers_array.my_all?(Integer)).to eql(true)
+      end
+
+      it 'returns true if all of the elements inside an array are true i.e not nil or false' do
+        expect(nil_and_numbers_array.my_all?).to_not eql(true)
+      end
+
+      it 'returns false if not all of the elements of the array match the regular expresion' do
+        expect(words_array.my_all? { |x| x.match(/h/) }).to eql(false)
+      end
+
+      it 'returns false if not all of the elements of the array match the argument passed' do
+        expect(numbers_array.my_all?(2)).to eql(false)
+      end
     end
   end
 
@@ -87,7 +104,7 @@ RSpec.describe Enumerable do
 
   describe 'my_inject' do
     it 'combines all elements of enum by applying a binary operation specified by a block' do
-      expect(number_range.my_inject { |sum, x| sum + x}).to eq(15)
+      expect(number_range.my_inject { |sum, x| sum + x }).to eq(15)
     end
 
     it 'combines all elements of enum by applying a binary operation specified by a symbol' do
