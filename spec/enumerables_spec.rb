@@ -6,6 +6,8 @@ RSpec.describe Enumerable do
   let(:nil_and_numbers_array) { [nil, 2, nil, 4, 5] }
   let(:number_range) { (1..5) }
   let(:words_array) { %w[hola hello goodbye never always] }
+  let(:a_proc) {proc { |sum, n| sum + n }}
+  let(:another_proc) {proc {|x| x+1}}
 
   describe '.my_each' do
     it 'executes a passed block for each element of an array' do
@@ -132,15 +134,31 @@ RSpec.describe Enumerable do
     it 'returns an enumerable if no block given' do
       expect(number_range.my_map).to be_a(Enumerator)
     end
+
+    it 'returns a new array with the results of running a proc once for every element in enum' do
+      expect(number_range.my_map(&another_proc) ).to eql([2,3,4,5,6])
+    end
   end
 
   describe 'my_inject' do
-    it 'combines all elements of enum by applying a binary operation specified by a block' do
-      expect(number_range.my_inject { |sum, x| sum + x }).to eq(15)
+    context 'A block is given' do
+      it 'combines all elements of enum by applying a binary operation specified by a block' do
+        expect(number_range.my_inject { |sum, x| sum + x }).to eq(15)
+      end
+
+      it 'combines all elements of an array by applying a binary operation specified by a block and an initial argument' do
+        expect(numbers_array.my_inject(2) { |prod, x| prod * x }).to eq(240)
+      end
+
+      it 'combines all elements of an array by applying a binary operation specified by a proc' do
+        expect(numbers_array.my_inject(&a_proc)).to eq(15)
+      end
     end
 
-    it 'combines all elements of enum by applying a binary operation specified by a symbol' do
-      expect(number_range.my_inject(:*)).to eq(120)
+    context 'No block given' do
+      it 'combines all elements of enum by applying a binary operation specified by a symbol' do
+        expect(number_range.my_inject(:*)).to eq(120)
+      end
     end
   end
 end
