@@ -27,6 +27,10 @@ RSpec.describe Enumerable do
       expect(my_each_with_index_array).to eql(['1 index is 0', '2 index is 1',
                                                '3 index is 2', '4 index is 3', '5 index is 4'])
     end
+
+    it 'returns an enumerable when no block is passed' do
+      expect(numbers_array.my_each_with_index).to be_a(Enumerator)
+    end
   end
 
   describe 'my_all?' do
