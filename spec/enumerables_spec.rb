@@ -1,5 +1,5 @@
 # spec/enumerables_spec.rb
-require './lib/enumerables'
+require_relative '../lib/enumerables.rb'
 
 RSpec.describe Enumerable do
   let(:numbers_array) { [1, 2, 3, 4, 5] }
@@ -21,6 +21,10 @@ RSpec.describe Enumerable do
       number_range.my_each { |x| myeach_range << x * 2 }
       expect(myeach_range).to eql([2, 4, 6, 8, 10])
     end
+
+    it 'returns enumerable whuen not passed a block' do
+      expect(numbers_array.my_each).to be_a(Enumerator)
+    end
   end
 
   describe '.my_each_with_index' do
@@ -32,6 +36,10 @@ RSpec.describe Enumerable do
     end
 
     it 'returns an enumerable when no block is passed' do
+      expect(numbers_array.my_each_with_index).to be_a(Enumerator)
+    end
+
+    it 'returns enumerable whuen not passed a block' do
       expect(numbers_array.my_each_with_index).to be_a(Enumerator)
     end
   end
