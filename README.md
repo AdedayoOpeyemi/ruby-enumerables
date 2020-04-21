@@ -17,7 +17,7 @@ To run this project use the terminal and the command $rb #{file_name.rb}
 
 1. Clone the repo
   - From a terminal window, change to the local directory where you want to clone your repository.
-  - Clone using the following command, for HTTPS: ```git clone https://github.com/alvaropazz/ruby-enumerables.git`` for SSH: ```git clone git@github.com:alvaropazz/ruby-enumerables.git```.
+  - Clone using the following command, for HTTPS: ```git clone https://github.com/alvaropazz/ruby-enumerables.git``` for SSH: ```git clone git@github.com:alvaropazz/ruby-enumerables.git```.
 2. Open the terminal and cd into the enumerables folder
 3. Run the "rspec" command.
 
