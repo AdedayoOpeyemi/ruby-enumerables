@@ -62,4 +62,26 @@ RSpec.describe Enumerable do
       expect(numbers_array.my_none?(String)).to eql(true)
     end
   end
+
+  describe 'my_count' do
+    it 'returns the number of items in enum that are equal to argument passed in the block' do
+      expect(numbers_array.my_count(&:even?)).to eql(2)
+    end
+
+    it 'counts the number of items in an array' do
+      expect(numbers_array.my_count).to eql(5)
+    end
+  end
+
+  describe 'my_map' do
+    it 'returns a new array with the results of running block once for every element in enum' do
+      mymap_array = []
+      number_range.my_map { |x| mymap_array << x * x }
+      expect(mymap_array).to eq([1, 4, 9, 16, 25])
+    end
+
+    it 'returns an enumerable if no block given' do
+      expect(number_range.my_map).to be_a(Enumerator)
+    end
+  end
 end
