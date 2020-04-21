@@ -6,8 +6,8 @@ RSpec.describe Enumerable do
   let(:nil_and_numbers_array) { [nil, 2, nil, 4, 5] }
   let(:number_range) { (1..5) }
   let(:words_array) { %w[hola hello goodbye never always] }
-  let(:a_proc) {proc { |sum, n| sum + n }}
-  let(:another_proc) {proc {|x| x+1}}
+  let(:a_proc) { proc { |sum, n| sum + n } }
+  let(:another_proc) { proc { |x| x + 1 } }
 
   describe '.my_each' do
     it 'executes a passed block for each element of an array' do
@@ -136,7 +136,7 @@ RSpec.describe Enumerable do
     end
 
     it 'returns a new array with the results of running a proc once for every element in enum' do
-      expect(number_range.my_map(&another_proc) ).to eql([2,3,4,5,6])
+      expect(number_range.my_map(&another_proc)).to eql([2, 3, 4, 5, 6])
     end
   end
 
@@ -146,7 +146,8 @@ RSpec.describe Enumerable do
         expect(number_range.my_inject { |sum, x| sum + x }).to eq(15)
       end
 
-      it 'combines all elements of an array by applying a binary operation specified by a block and an initial argument' do
+      it 'combines all elements of an array by applying a binary operation
+      specified by a block and an initial argument' do
         expect(numbers_array.my_inject(2) { |prod, x| prod * x }).to eq(240)
       end
 
