@@ -52,4 +52,14 @@ RSpec.describe Enumerable do
       expect(words_array.my_any? { |x| x.match(/h/) }).to eql(true)
     end
   end
+
+  describe 'my_none?' do
+    it 'returns true if the block never returns true for all elements' do
+      expect(numbers_array.my_none? { |x| x == 5 }).to_not eql(true)
+    end
+
+    it 'returns true if the block never returns true for all elements' do
+      expect(numbers_array.my_none?(String)).to eql(true)
+    end
+  end
 end
