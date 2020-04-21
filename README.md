@@ -7,10 +7,19 @@ This project recreated the each method and then used it to recreate the followin
 ## Built With
 
 - Ruby
+- RSpec
 
 ## Setup
 
 To run this project use the terminal and the command $rb #{file_name.rb}
+
+## Run Tests
+
+1. Clone the repo
+  - From a terminal window, change to the local directory where you want to clone your repository.
+  - Clone using the following command, for HTTPS: ```git clone https://github.com/alvaropazz/ruby-enumerables.git`` for SSH: ```git clone git@github.com:alvaropazz/ruby-enumerables.git```.
+2. Open the terminal and cd into the enumerables folder
+3. Run the "rspec" command.
 
 ## Authors
 
@@ -34,7 +43,7 @@ Give a ⭐️ if you like this project!
 
 - The following blog helped me to undertand the *inject* method:
 - - [T-Shaped's Blog](http://kylefdoherty.github.io/blog/2014/06/13/ruby-inject-basics/)
-- The following blog helped me to implement the *inject* method so that it passes all of the test required by Microverse's code reviewers
+- The following blog helped me to implement the *inject* method so that it passes all of the test required by Microverse's code reviewers:
 - - [Mauricio Linares' Blog](https://mauricio.github.io/2015/01/12/implementing-enumerable-in-ruby.html)
 - The following resources were also used:
 - - [About the *nil* object](https://medium.com/rubycademy/the-nil-value-in-ruby-d60e6a3642b9)
