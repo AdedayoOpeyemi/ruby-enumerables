@@ -4,7 +4,7 @@ require './lib/enumerables'
 RSpec.describe Enumerable do
   let(:numbers_array) { [1, 2, 3, 4, 5] }
   let(:number_range) { (1..5) }
-  let(:words_array) {['hola','hello','goodbye','never','always']}
+  let(:words_array) { %w[hola hello goodbye never always] }
 
   describe '.my_each' do
     it 'executes a passed block for each element of an array' do
