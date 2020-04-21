@@ -84,4 +84,14 @@ RSpec.describe Enumerable do
       expect(number_range.my_map).to be_a(Enumerator)
     end
   end
+
+  describe 'my_inject' do
+    it 'combines all elements of enum by applying a binary operation specified by a block' do
+      expect(number_range.my_inject { |sum, x| sum + x}).to eq(15)
+    end
+
+    it 'combines all elements of enum by applying a binary operation specified by a symbol' do
+      expect(number_range.my_inject(:*)).to eq(120)
+    end
+  end
 end
